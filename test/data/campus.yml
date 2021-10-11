@@ -1,0 +1,41 @@
+name: Campus
+description: |
+  Welcome to the World of Zuul!
+  World of Zuul is a new, incredibly boring adventure game.
+  Type 'help' if you need help.
+start: outside
+items:
+  mug:
+    description: a mug of green tea
+    room: pub
+    weight: 400
+  manual:
+    description: a manual
+    room: office
+    weight: 2000
+rooms:
+  outside:
+    description: "outside the main entrance of the university"
+  theater:
+    description: "in a lecture theater"
+  pub:
+    description: "in the campus pub"
+  lab:
+    description: "in a computing lab"
+  office:
+    description: "in the computing admin office"
+  cellar:
+    description: "in a cold, damp cellar"
+connections:
+    north: south
+    east: west
+    up: down
+exits:
+  outside:
+    east: theater
+    south: lab
+    west: pub
+  lab:
+    east: office
+  pub:
+    down: cellar
