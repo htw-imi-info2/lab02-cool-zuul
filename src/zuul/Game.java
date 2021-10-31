@@ -6,6 +6,10 @@ import zuul.world.Room;
 import zuul.world.World;
 import zuul.world.persistence.WorldAdapter;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
+
 /**
  *  This class is the main class of the "World of Zuul" application.
  *  "World of Zuul" is a very simple, text based adventure game.  Users
@@ -25,6 +29,7 @@ import zuul.world.persistence.WorldAdapter;
 public class Game
 {
     private Parser parser;
+    private PrintStream printStream;
     private GameStatus gameStatus;
     private World world ;
 
@@ -35,11 +40,15 @@ public class Game
     {
         this("data/zuul.yml");
     }
-    public Game(String worldFileName)
+    public Game(String worldFileName){
+        this(worldFileName,System.in,System.out);
+    }
+    public Game(String worldFileName, InputStream inputStream, PrintStream printStream)
     {
         Room.resetCounter();
         createRooms(worldFileName);
-        parser = new Parser();
+        parser = new Parser(inputStream);
+        this.printStream = printStream;
     }
 
     /**
@@ -65,7 +74,7 @@ public class Game
         while (gameStatus.isPlaying()) {
             Command command = parser.getCommand();
             String output = command.process(gameStatus);
-            System.out.println(output);
+            printStream.println(output);
         }
 
     }
@@ -87,11 +96,11 @@ public class Game
      */
     private void printWelcome()
     {
-        System.out.println();
-        System.out.println(world.getDescription());
+        printStream.println();
+        printStream.println(world.getDescription());
 
-        System.out.println(gameStatus.getLocationDescription());
-        System.out.println();
+        printStream.println(gameStatus.getLocationDescription());
+        printStream.println();
     }
     public static void playInstantly(){new Game().play();}
 

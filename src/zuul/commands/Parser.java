@@ -1,4 +1,5 @@
 package zuul.commands;
+import java.io.InputStream;
 import java.util.Scanner;
 
 /**
@@ -24,9 +25,9 @@ public class Parser
     /**
      * Create a parser to read from the terminal window.
      */
-    public Parser() 
+    public Parser(InputStream inputStream)
     {
-        reader = new Scanner(System.in);
+        reader = new Scanner(inputStream);
     }
 
     /**
