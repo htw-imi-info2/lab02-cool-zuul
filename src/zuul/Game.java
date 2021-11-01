@@ -82,7 +82,7 @@ public class Game
     /**
      * This is a further method added by BK to
      * provide a clearer interface that can be tested:
-     * Game processes a commandLine and returns output.
+     * Game processes a coxmmandLine and returns output.
      * @param commandLine - the line entered as String
      * @return output of the command
      */
